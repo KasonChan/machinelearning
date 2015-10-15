@@ -1,6 +1,4 @@
-package operators
-
-import primitivetypes.PrimitivesTypes
+package core
 
 /**
  * Created by kasonchan on 10/12/15.

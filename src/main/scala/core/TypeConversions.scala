@@ -1,6 +1,4 @@
-package typeconversions
-
-import primitivetypes.PrimitivesTypes
+package core
 
 /**
  * Created by kasonchan on 10/10/15.

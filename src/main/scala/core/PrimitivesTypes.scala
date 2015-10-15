@@ -1,4 +1,4 @@
-package primitivetypes
+package core
 
 /**
  * Created by kasonchan on 10/9/15.

@@ -6,3 +6,4 @@ Scala.
 ### References ###
 
 - Scala for Machine Learning by Patrick R. Nicolas
+- http://r-research-tool.schwilk.org/

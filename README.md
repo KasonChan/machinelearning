@@ -7,3 +7,4 @@ Scala.
 
 - Scala for Machine Learning by Patrick R. Nicolas
 - http://r-research-tool.schwilk.org/
+- https://www.youtube.com/watch?v=WlL6ibfPfgg

@@ -109,7 +109,10 @@ object RDemo {
     i match {
       case None => None
       case Some(a: Array[Info]) => a.groupBy(_.year)
-        .map(i => (i._1, i._2.map(j => j.mdPSI.getOrElse(0.0)).min)).minBy(_._2)._1
+        .map(i => (i._1, i._2.map(x => x.mdPSI)))
+        .map(i => (i._1, i._2.flatten))
+        .map(j => (j._1, j._2.sum / j._2.length))
+        .minBy(_._2)._1
     }
   }
 
@@ -153,5 +156,5 @@ object RDemo {
     val q4 = lowestMdPSIAverageYear(information)
     println(q4)
   }
-  
+
 }

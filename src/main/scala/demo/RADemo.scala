@@ -2,7 +2,7 @@ package demo
 
 import akka.actor.ActorSystem
 import akka.stream.ActorMaterializer
-import akka.stream.scaladsl.{Flow, Source}
+import akka.stream.scaladsl._
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.duration._
@@ -47,12 +47,15 @@ object RADemo {
     (lines via rowFlow via transformFlow).runForeach(println)
 
     val speciesFlow = Flow[Info].groupBy(x => x.spcode)
+    val speciesCountFlow = Flow[Info].groupBy(x => x.spcode).fold(0)((x, i) => x + 1)
+    val speciesCountSink = Sink.foreach(println)
 
     /**
      * Q1 How many different species are recorded in these data?
      * 5 species
      */
     (lines via rowFlow via transformFlow via speciesFlow).runFold(0)((x, i) => x + 1).foreach(println)
+    (lines via rowFlow via transformFlow via speciesCountFlow).runWith(speciesCountSink)
 
     as awaitTermination (60 seconds)
   }

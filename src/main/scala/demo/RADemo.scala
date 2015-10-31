@@ -97,6 +97,14 @@ object RADemo {
           r._1 +
           " sp."))
 
+    /**
+     * Q4 For which year was the average mid day water potential lowest (most negative)?
+     */
+    val lowestMdPSIAverageYear = Flow[Info].groupBy(_.year)
+      .map(i => i._2.filter(x => x.mdPSI.isDefined))
+
+    (lines via rowFlow via transformFlow via lowestMdPSIAverageYear).runForeach(println)
+
     as awaitTermination (2 minutes)
   }
 

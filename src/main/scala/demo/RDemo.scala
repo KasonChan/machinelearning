@@ -4,8 +4,9 @@ import scala.io.Source
 import scala.util.{Failure, Success, Try}
 
 /**
- * Created by kasonchan on 10/19/15.
- */
+  * Created by kasonchan on 10/19/15.
+  * Implemented with Scala transformation.
+  */
 object RDemo {
 
   private val CSV_DELIM = ","
@@ -33,9 +34,10 @@ object RDemo {
   }
 
   /**
-   * Transform the array of data into array of info
-   * @param data the array of array of String
-   */
+    * Transform the array of data into array of info
+    *
+    * @param data the array of array of String
+    */
   def transformToInfo(data: Array[Array[String]]): Array[Info] = {
     data.collect {
       case Array(site, tag, spcode, date, pdPSI, mdPSI, year) =>
@@ -49,10 +51,11 @@ object RDemo {
   }
 
   /**
-   * How many different species are recorded in these data?
-   * Returns the different species count
-   * @param i the array of info
-   */
+    * How many different species are recorded in these data?
+    * Returns the different species count
+    *
+    * @param i the array of info
+    */
   def speciesCount(i: Option[Array[Info]]): Option[Int] = {
     i match {
       case None => None
@@ -61,9 +64,10 @@ object RDemo {
   }
 
   /**
-   * Returns the different species
-   * @param i the array of info
-   */
+    * Returns the different species
+    *
+    * @param i the array of info
+    */
   def species(i: Option[Array[Info]]): Option[Array[String]] = {
     i match {
       case None => None
@@ -72,12 +76,13 @@ object RDemo {
   }
 
   /**
-   * Mid day water potential should always be at least as negative as pre-dawn
-   * water potential. Are there any days and plants for which mid-day water
-   * potential is higher than pre-dawn?
-   * Returns the different species and dates
-   * @param i the array of info
-   */
+    * Mid day water potential should always be at least as negative as pre-dawn
+    * water potential. Are there any days and plants for which mid-day water
+    * potential is higher than pre-dawn?
+    * Returns the different species and dates
+    *
+    * @param i the array of info
+    */
   def dates(i: Option[Array[Info]]): Option[Array[String]] = {
     i match {
       case None => None
@@ -87,10 +92,11 @@ object RDemo {
   }
 
   /**
-   * What is the lowest (most negative) mid-day water potential in this data set?
-   * When and for which species was this value recorded?
-   * @param i the array of info
-   */
+    * What is the lowest (most negative) mid-day water potential in this data set?
+    * When and for which species was this value recorded?
+    *
+    * @param i the array of info
+    */
   def lowestMdPSI(i: Option[Array[Info]]): Option[Array[(String, Option[Double], String)]] = {
     i match {
       case None => None
@@ -102,9 +108,10 @@ object RDemo {
   }
 
   /**
-   * For which year was the average mid day water potential lowest (most negative)?
-   * @param i the array of info
-   */
+    * For which year was the average mid day water potential lowest (most negative)?
+    *
+    * @param i the array of info
+    */
   def lowestMdPSIAverageYear(i: Option[Array[Info]]) = {
     i match {
       case None => None

@@ -3,8 +3,9 @@ package demo
 import scala.collection.mutable
 
 /**
- * Created by kasonchan on 10/20/15.
- */
+  * Created by kasonchan on 10/20/15.
+  * Memorization implementations.
+  */
 case class Memo[A, B](f: A => B) extends (A => B) {
   private val cache = mutable.Map.empty[A, B]
 

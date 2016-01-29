@@ -8,8 +8,9 @@ import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.duration._
 
 /**
- * Created by kasonchan on 10/19/15.
- */
+  * Created by kasonchan on 10/19/15.
+  * Implemented with Akka streams.
+  */
 object RADemo {
 
   implicit val as = ActorSystem("actorSystem")
@@ -53,9 +54,9 @@ object RADemo {
     //    (lines via rowFlow via transformFlow).runWith(printlnSink)
 
     /**
-     * Q1 How many different species are recorded in these data?
-     * 5 species
-     */
+      * Q1 How many different species are recorded in these data?
+      * 5 species
+      */
     val speciesFlow = Flow[Info].groupBy(x => x.spcode)
     val speciesCountFlow = Flow[Info].groupBy(x => x.spcode).fold(0)((x, i) => x + 1)
 
@@ -67,11 +68,11 @@ object RADemo {
       .runWith(printlnSink)
 
     /**
-     * Q2 Mid day water potential should always be at least as negative as pre-dawn
-     * water potential. Are there any days and plants for which mid-day water
-     * potential is higher than pre-dawn?
-     * "08/25/12" "05/22/13" "04/10/11" "05/24/13" "05/23/13" "07/21/11"
-     */
+      * Q2 Mid day water potential should always be at least as negative as pre-dawn
+      * water potential. Are there any days and plants for which mid-day water
+      * potential is higher than pre-dawn?
+      * "08/25/12" "05/22/13" "04/10/11" "05/24/13" "05/23/13" "07/21/11"
+      */
     val dateFlow = Flow[Info].filter(x =>
       x.mdPSI.getOrElse(0.0) > x.pdPSI.getOrElse(0.0))
       .groupBy(y => y.date)
@@ -81,9 +82,9 @@ object RADemo {
       .runFold("")((x, i) => i + " " + x).foreach(println)
 
     /**
-     * Q3 What is the lowest (most negative) mid-day water potential in this data set?
-     * When and for which species was this value recorded?
-     */
+      * Q3 What is the lowest (most negative) mid-day water potential in this data set?
+      * When and for which species was this value recorded?
+      */
     val lowestMdPSIFlow = Flow[Info].fold(Info("", "", "", "", None, None, 0))((m, i) =>
       if (i.mdPSI.getOrElse(0.0) < m.mdPSI.getOrElse(0.0)) i else m).map(x => (x.spcode, x.mdPSI, x.date))
 
@@ -98,8 +99,8 @@ object RADemo {
           " sp."))
 
     /**
-     * Q4 For which year was the average mid day water potential lowest (most negative)?
-     */
+      * Q4 For which year was the average mid day water potential lowest (most negative)?
+      */
     val lowestMdPSIAverageYear = Flow[Info].groupBy(_.year)
       .map(i => i._2.filter(x => x.mdPSI.isDefined))
 

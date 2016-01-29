@@ -4,8 +4,9 @@ import flow.Flow
 import helperClass.MX
 
 /**
- * Created by kasonchan on 10/9/15.
- */
+  * Created by kasonchan on 10/9/15.
+  * Mass balance calculation demo.
+  */
 object MXDemo {
 
   def main(args: Array[String]) {

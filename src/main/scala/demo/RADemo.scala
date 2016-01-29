@@ -19,7 +19,7 @@ object RADemo {
   private val CSV_DELIM = ","
   private val pathName = "resources/data/oak-water-potentials-simple.csv"
 
-  def load(pathName: String): Iterator[String] = io.Source.fromFile(pathName).getLines()
+  def load(pathName: String): Iterator[String] = scala.io.Source.fromFile(pathName).getLines()
 
   case class Info(site: String,
                   tag: String,
